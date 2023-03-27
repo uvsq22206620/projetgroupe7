@@ -1,0 +1,49 @@
+import random
+import string
+
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+def substitution (message=""):
+
+    proposition1 = input ("Souhaitez-vous supprimer les caractères spéciaux ? (Répondre par 'oui' ou 'non')")
+    while proposition1.lower() not in ["oui", "non"]:
+        proposition1 = input ("Souhaitez-vous supprimer les caractères spéciaux ? Une réponse soit par 'oui', soit par 'non' est obligatoire")
+    
+    
+    proposition2 = input ("Souhaitez-vous supprimer les espaces ? (Répondre par 'oui' ou 'non')")
+    while proposition2.lower() not in ["oui", "non"]:
+        proposition2 = input ("Souhaitez-vous supprimer les espaces ? Une réponse soit par 'oui', soit par 'non' est obligatoire")
+        
+
+    liste = []
+    mot_code = ""
+    caractere_speciaux = string.punctuation #on place l'ensemble des caractères spéciaux dans une chaîne de caractère.
+    espace = " "  
+    
+    if proposition2.lower() == "oui" :
+        message = message.replace(" ", "") #on remplace tous les espaces par du "vide"
+
+    if proposition1.lower() == "oui" :
+        for lettre in message.lower(): #on met tous les caractères en minuscule
+            if lettre not in caractere_speciaux:
+                liste.append(lettre) #si l'utilisateur décide de supprimer tous les caractères spéciaux, on ajoute à la liste uniquement ce qui n'est pas un caractère spécial
+
+
+    elif proposition1.lower() == "non" or proposition2 == "non" :
+        for lettre in message.lower():
+            liste.append(lettre) #si l'utilisateur décide au contraire de conserver les caractères spéciaux et les espaces, le message est placé caractères par caractères dans une liste
+
+
+    nouvel_alphabet_melange = random.sample(alphabet, len(alphabet)) #fonction qui permet de melanger aléatoirement une chaîne de caractère, ici c'est l'alphabet
+    
+    for lettre in liste: 
+        if lettre in alphabet :
+            mot_code += nouvel_alphabet_melange[alphabet.index(lettre)] #si le caractère est une lettre de l'alphabet, on ajoute au mot codé, la lettre positionnée à la même position (dans l'alphabet mélangé) que la lettre initial (de l'alphabet normal).
+        else :
+            mot_code += lettre 
+
+    return mot_code
+
+message_code = substitution (input("Saisir le message à coder")) #on stocke la variable afin de pouvoir potentiellement la réutiliser
+
+print("Le message codé est :", message_code)
