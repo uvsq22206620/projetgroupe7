@@ -16,7 +16,7 @@ Le chiffrement de César (Partie de Kaïs) :
 Le chiffre de Vignénère (Partie de Kaïs) :
 
 
-La substitution monoalphabétique (Partie de Schneid) : 
+La Substitution Monoalphabétique Générale (Partie de Schneid) : La substitution monoalphabétique générale est une technique de chiffrement par substitution, qui consiste à remplacer chaque lettre d'un message initial par une autre lettre. La même lettre du message initial est toujours remplacée par la même lettre du message chiffré, peu importe sa position dans le message, cela rend la chose plus ou moins facile à décrypter par analyse de fréquence. Pour cela nous utilisons une table de substitution, qui associe à chaque lettre du message une autre lettre de l'alphabet. La table de substitution est créée en utilisant une clé de chiffrement (en l'occurrence, il s'agit de l'alphabet mélangé aléatoirement).
 
 
 L'attaque brute-force : 
