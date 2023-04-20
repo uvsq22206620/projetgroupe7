@@ -10,13 +10,13 @@ La Scytale (Partie d'Anissa) :
 Le chiffrement de la Scytale est un chiffrement par transposition. Il est l'un des plus anciens dispositifs de cryptographie (les Spartiates). Il consiste à prendre un texte et mettre chaque lettre du texte dans chaque case d'une grille. On aura une clé qui représente le nombre de colonnes, et le but de notre code Scytale est de pivoter la grille en laissant chaque caractère à la position initiale et essayer d'y retrouver un texte clair.
 
 
-Le chiffrement de César : 
+Le chiffrement de César (Partie de Kaïs) : 
 
 
-Le chiffre de Vignénère :
+Le chiffre de Vignénère (Partie de Kaïs) :
 
 
-La substitution monoalphabétique : 
+La substitution monoalphabétique (Partie de Schneid) : 
 
 
 L'attaque brute-force : 
