@@ -16,8 +16,8 @@ Le chiffrement de César (Partie de Kaïs) :
 Le chiffre de Vignénère (Partie de Kaïs) :
 
 
-La Substitution Monoalphabétique Générale (Partie de Schneid) : La substitution monoalphabétique générale est l'une des techniques de chiffrement les plus anciennes, qui consiste à remplacer chaque lettre d'un message initial par une autre lettre. La même lettre du message initial est toujours remplacée par la même lettre du message chiffré, peu importe sa position dans le message, cela rend la chose plus ou moins facile à décrypter par analyse de fréquence. Pour cela nous utilisons une table de substitution, qui associe à chaque lettre du message une autre lettre de l'alphabet. La table de substitution est créée en utilisant une clé de chiffrement (en l'occurrence, il s'agit de l'alphabet mélangé aléatoirement).
-
+La Substitution Monoalphabétique Générale (Partie de Schneid) : 
+La substitution monoalphabétique générale est l'une des techniques de chiffrement les plus anciennes, qui consiste à remplacer chaque lettre d'un message initial par une autre lettre. La même lettre du message initial est toujours remplacée par la même lettre du message chiffré, peu importe sa position dans le message, cela rend la chose plus ou moins facile à décrypter par analyse de fréquence. Pour cela nous utilisons une table de substitution, qui associe à chaque lettre du message une autre lettre de l'alphabet. La table de substitution est créée en utilisant une clé de chiffrement (en l'occurrence, il s'agit de l'alphabet mélangé aléatoirement).
 
 L'attaque brute-force : 
 L'attaque brute-force (attaque par force brute) est une méthode utilisée en cryptanalyse pour trouver un mot de passe ou une clé. Il s'agit de tester, une à une, toutes les combinaisons possibles.
