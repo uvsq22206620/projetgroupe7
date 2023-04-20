@@ -313,9 +313,12 @@ nombre_de_tentatives = int(input("Entrez le nombre de tentatives que vous souhai
 for i in range(nombre_de_tentatives):
     essai = decryptage_substitution(message_code)
     if essai not in dictionnaire :
-        dictionnaire[essai] = 1 #si la lettre n'est pas enregistrée dans le dictionnaire, maintenant elle y existe et on y associe sa 'fréquence' qui est de 1
-        print (essai) #on renvoit ensuite ce que le programme a déchiffré à l'utilisateur
-    else :
+        for lettre in essai :
+            if lettre.lower() in voyelles :
+                dictionnaire[essai] = 1  #si la lettre n'est pas enregistrée dans le dictionnaire, maintenant elle y existe et on y associe sa 'fréquence' qui est de 1
+        print (essai) #on renvoit ensuite ce que le programme a déchiffré à l'utilisateur, en excluant les chaînes de caractères sans voyelles car cela ne peut pas être un message en français
+
+    else : 
         continue #si la lettre est déjà dans le dictionnaire, le programme ne le renvoit pas (pour éviter de trouver des similitudes dans ce que peut envoyer python), et continue de le décrypter jusquà 'nombres_de_tentatives'
 
 
