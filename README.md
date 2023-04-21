@@ -10,10 +10,10 @@ La Scytale (Partie d'Anissa) :
 Le chiffrement de la Scytale est un chiffrement par transposition. Il est l'un des plus anciens dispositifs de cryptographie (les Spartiates). Il consiste à prendre un texte et mettre chaque lettre du texte dans chaque case d'une grille. On aura une clé qui représente le nombre de colonnes, et le but de notre code Scytale est de pivoter la grille en laissant chaque caractère à la position initiale et essayer d'y retrouver un texte clair.
 
 
-Le chiffrement de César (Partie de Kaïs) : 
+Le chiffrement de César (Partie de Kaïs) : Le code de César est une technique de chiffrement qui consiste à remplacer chaque lettre d'un message par une autre lettre située un certain nombre de positions plus loin dans l'alphabet. Le décalage est la clé de chiffrement. Le code de César reste un chiffrement très facile à casser car il n'y a que 26 clés possibles (une pour chaque lettre de l'alphabet
 
 
-Le chiffre de Vignénère (Partie de Kaïs) :
+Le chiffre de Vignénère (Partie de Kaïs) : Le code de Vigenère est une méthode de chiffrement polyalphabétique qui a été inventée par le cryptographe français Blaise de Vigenère au XVIe siècle. La clé de Vigenère est une série de lettres qui est utilisée pour chiffrer le texte brut. Pour chiffrer le texte, chaque lettre du texte est décalée d'un nombre de positions dans l'alphabet en fonction de la lettre correspondante de la clé de Vigenère. Si la clé de Vigenère est plus courte que le texte brut, la clé est répétée jusqu'à ce qu'elle ait la même longueur que le texte.
 
 
 La Substitution Monoalphabétique Générale (Partie de Schneid) : 
