@@ -2,9 +2,7 @@ import random
 import string
 import collections
 
-
 #SCYTALE : Partie d'Anissa
-
 def demande() -> str:
     
     """ fonction demande qui permet de demander à l'utilisateur 
@@ -29,8 +27,7 @@ def demande() -> str:
         return
     return texte
 
-
-
+#ENCRYPTAGE SCYTALE
 def scytale_encrypt(texte : str, diametre : int) ->str: 
     """fonction qui encrypte un texte en utilisant la technique de chiffrement de la Scytale"""
 
@@ -50,7 +47,7 @@ def scytale_encrypt(texte : str, diametre : int) ->str:
     
     return result
 
-
+#DECRYPTAGE SCYTALE
 def scytale_decrypt(texte_d : str, diametre : int):
     """fonction qui décrypte un texte en utilisant la technique de chiffrement de la Scytale"""
 
@@ -59,8 +56,6 @@ def scytale_decrypt(texte_d : str, diametre : int):
         nb_column = len(texte_d)//diametre #division entiere de la taille du texte et le diametre
     elif reste !=0:
         nb_column = len(texte_d)//diametre + 1 #division entiere de la taille du texte et le diametre + 1 pour être certain d'avoir assez de colonnes 
-
-
 
     row_tab = [] #liste qui sert à sauver chq élément de chq ligne
     row = []
@@ -81,7 +76,6 @@ def scytale_decrypt(texte_d : str, diametre : int):
             cpt+=1
         reste-=1
 
-
     new_text = ""
     c=0
     for i in range(nb_column): #double boucle qui permet d'explorer le message ligne par ligne 
@@ -92,7 +86,7 @@ def scytale_decrypt(texte_d : str, diametre : int):
                 break #obligés d'arrêter la boucle sinon elle tourne...
     return new_text
 
-
+#ATTAQUE BRUTE FORCE SCYTALE
 def brute_force_scytale(texte, n):
     """fonction qui permet d'attaquer la Scytale en force brute"""
     lst = []
@@ -105,10 +99,11 @@ print(scytale_decrypt(demande(), 4))
 print(brute_force_scytale(demande(), 6))
 
 
+
+
+
 #CÉSAR : Partie de Kaïs
-
 #CHIFFREMENT CESAR#
-
 def chiffrement_cesar(message, clé):
     message_chiffré = ""
     for caractère in message:
@@ -128,7 +123,6 @@ def chiffrement_cesar(message, clé):
             message_chiffré += ""
     return message_chiffré
 
-
 clé = int(input("Entrez la clé de chiffrement, soit le décalage, (un nombre entier) : "))
 choix_fichier = input("Voulez-vous chiffrer un fichier .txt ? (O/N) : ")
 if choix_fichier.upper() == "O":
@@ -145,7 +139,6 @@ message_chiffré = chiffrement_cesar(message, clé)
 print("Message chiffré demandé :", message_chiffré)
 
 #DECHIFFREMENT CESAR#
-
 def dechiffrement_cesar(message_chiffré, clé):
     message_déchiffré = ""
     for caractère in message_chiffré:
@@ -178,9 +171,8 @@ if choix_fichier.upper() == "O":
         message = fichier.read()
         message_chiffré = chiffrement_cesar(message, clé)
         print("Message chiffré via fichier texte :", message_chiffré)
-
+      
 #ATTAQUE POUR Cesar#
-
 def brute_force_cesar():
     message_chiffre = input("Entrez le message chiffré : ")
     for cle in range(1, 26):
@@ -200,17 +192,14 @@ def brute_force_cesar():
             message_dechiffre += lettre_dechiffre
         print('Clé', cle, ':', message_dechiffre)
 
-
-
 brute_force_cesar()
 
 
+
+
+
 #VIGENERE : Partie de Kaïs
-
 #CHIFFREMENT VIGENERE#
-
-
-
 def vigenere_chiffrement(texte="", cle="", fichier="", supprimer_espaces=True, supprimer_caracteres=True):
     if not texte and not fichier:
         print("Aucun texte ou fichier à chiffrer n'a été fourni.")
@@ -264,8 +253,6 @@ texte_chiffre = vigenere_chiffrement(texte_a_chiffrer, cle_de_vigenere, nom_fich
 print("Le texte chiffré est :", texte_chiffre)
 
 #DECHIFFREMENT VIGENERE#
-
-
 def vigenere_dechiffrement(texte="", cle="", fichier="", supprimer_espaces=True, supprimer_caracteres=True):
     if not texte and not fichier:
         print("Aucun texte ou fichier à déchiffrer n'a été fourni.")
@@ -318,9 +305,11 @@ else:
 texte_dechiffre = vigenere_dechiffrement(texte_a_dechiffrer, cle_de_vigenere, nom_fichier, supprimer_espaces, supprimer_caracteres)
 print("Le texte déchiffré est :", texte_dechiffre)
 
+
+
+
+
 # SUBSTITUTION MONOALPHABÉTIQUE : Partie de Schneid 
-
-
 dictionnaire = {}
 
 def encryptage_substitution (message= ""):
@@ -365,7 +354,6 @@ def encryptage_substitution (message= ""):
     return mot_code
 
 
-
 #CODER UN MESSAGE
 coder_un_message = input("Souhaitez-vous coder un message ? (Répondre par 'oui' ou 'non')")
 while coder_un_message.lower() not in ["oui", "non"]: 
@@ -386,8 +374,6 @@ if coder_un_fichier_texte.lower() == "oui" :
         print ("Le message du fichier codé est :", mot_code)
 
 
-
-
 def decryptage_substitution(message_code=""): 
 
     #MIS EN PLACE DE VARIABLES POUR LA FONCTION
@@ -395,7 +381,6 @@ def decryptage_substitution(message_code=""):
     cle_de_dechiffrement = random.sample(alphabet, len(alphabet))
     message_dechiffre = ""
     
-
 
     #DECHIFFREMENT PAR FORCE BRUTE
     for caractere in message_code:
@@ -408,11 +393,9 @@ def decryptage_substitution(message_code=""):
     return message_dechiffre
 
 
-
 #MIS EN PLACE DE VARIABLES
 message_code = input("Entrez le message chiffré à déchiffer")
 nombre_de_tentatives = int(input("Entrez le nombre de tentatives que vous souhaitez voir (choisir NECESSAIREMENT un nombre positif (ou nul))")) #si le nombre de tentative = 0 alors le code ne rend pas de valeur
-
 
 
 #NOMBRE DE TENTATIVES
@@ -423,19 +406,16 @@ for i in range(nombre_de_tentatives):
         print (essai) #on renvoit ensuite ce que le programme a déchiffré à l'utilisateur
     else :
         continue #si la lettre est déjà dans le dictionnaire, le programme ne le renvoit pas (pour éviter de trouver des similitudes dans ce que peut envoyer python), et continue de le décrypter jusquà 'nombres_de_tentatives'
-
-
-
-
-
+        
+        
+        
+        
+        
 #TENTATIVE ATTAQUE ANALYSE DE FRÉQUENCE SUR LA SUBSTITUTION MONOALPHABÉTIQUE
-
 def decryptage_substitution(message_code=""):
-
 
     frequences_attendues_langue_francaise ={'a': 9.42, 'b': 1.02, 'c': 2.64, 'd': 3.39, 'e': 15.87, 'f': 0.95, 'g': 1.04, 'h': 0.77, 'i': 8.41, 'j': 0.89, 'k': 0.00, 'l': 5.34, 'm': 3.24, 'n': 7.15, 'o': 5.14, 'p': 2.86, 'q': 1.06, 'r': 6.46, 's': 7.90, 't': 7.26, 'u': 6.24, 'v': 2.15, 'w': 0.00, 'x': 0.30, 'y': 0.24, 'z': 0.32} #fréquence attendues des lettres dans la langue française
     alphabet = "abcdefghijklmnopqrstuvwxyz"
-    
     
     frequence_mot_chiffre = {} #on crée un dictionnaire pour stocker les lettres du mot codé et leur fréquence d'apparition
     for lettre in message_code : 
@@ -443,7 +423,6 @@ def decryptage_substitution(message_code=""):
             frequence_mot_chiffre[lettre] = 1 #si la lettre n'est pas enregistrée dans le dictionnaire, maintenant elle existe et on y associe sa fréquence qui est de 1
         else :
             frequence_mot_chiffre[lettre] += 1 #si la lettre est déjà dans le dictionnaire, on ajoute à la valeur précédente + 1
-
 
     mot_dechiffre = message_code #mis en place d'une nouvelle variable que l'on va modifier afin de ne pas perdre la précédente
     
@@ -461,8 +440,10 @@ def decryptage_substitution(message_code=""):
 print (decryptage_substitution(input("Saisir le message chiffré à déchiffrer")))
 
 
-#ATTAQUE POUR VIGENERE - ANALYSE DE FREQUENCE TENTATIVE #
 
+
+
+#ATTAQUE POUR VIGENERE - ANALYSE DE FREQUENCE TENTATIVE #
 def casser_vigenere(texte_chiffre, langue='fr'):
     # Charger les fréquences attendues pour la langue choisie
     with open(f'{langue}_freq.txt') as f:
