@@ -357,7 +357,7 @@ def encryptage_substitution (message= ""):
         else :
             mot_code += lettre #on ajoute à la chaîne de caractère notre caractère codé
 
-    #FIN DE LA FONCTION, RETOUR DU MOT CODE
+    #FIN DE LA FONCTION, RETOUR DU MOT CHIFFRE
     return mot_code, alphabet_melange
 
 
@@ -367,24 +367,24 @@ def encryptage_substitution (message= ""):
 
 
 #CODER UN MESSAGE
-coder_un_message = input("Souhaitez-vous coder un message ? (Répondre par 'oui' ou 'non')")
+coder_un_message = input("Souhaitez-vous chiffrer un message ? (Répondre par 'oui' ou 'non')")
 
 while coder_un_message.lower() not in ["oui", "non"]: 
-    coder_un_message = input("Souhaitez-vous coder un message ? Une réponse par 'oui' ou par 'non' est obligatoire)")
+    coder_un_message = input("Souhaitez-vous chiffrer un message ? Une réponse par 'oui' ou par 'non' est obligatoire)")
 if coder_un_message == 'oui' :
-    message_chiffre, cle_de_chiffrement_substitution = encryptage_substitution(message = input("Saisir le message à coder"))
-    print("le message codé est :", message_chiffre)
+    message_chiffre, cle_de_chiffrement_substitution = encryptage_substitution(message = input("Saisir le message à chiffrer"))
+    print("le message chiffré est :", message_chiffre)
 
 
 #CODER UN FICHIER TEXTE 
-coder_un_fichier_texte = input("Souhaitez-vous coder un fichier texte ? Répondre par 'oui' ou par 'non'")
+coder_un_fichier_texte = input("Souhaitez-vous chiffrer un fichier texte ? Répondre par 'oui' ou par 'non'")
 
 if coder_un_fichier_texte.lower() == "oui" :
     nom_du_fichier = input("Entrez le nom du fichier avec l'extension '.txt'")
     with open(nom_du_fichier, "r") as fichier : #commande qui permet de lire un fichier sans le modifier, fonction 'with' qui permet de garantir que le fichier va être fermé après exécution
         message_fichier = fichier.read() #fonction read qui permet de renvoyer le fichier dans une chaîne de caractère
         mot_code, cle_de_chiffrement_substitution = encryptage_substitution(message_fichier)
-        print ("Le message du fichier codé est :", mot_code)
+        print ("Le message du fichier chiffré est :", mot_code)
         
         
         
