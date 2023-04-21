@@ -12,7 +12,7 @@ def demande() -> str:
     un chemin vers un fichier.txt dans l'ordinateur. 
     """
     
-    a = input("voulez vous entrer un texte ou un fichier texte? \n" + "entrer 'Texte' ou 'Fichier' : ")
+    a = input("voulez vous entrer un texte ou un fichier texte? \n" + "entrer 'Texte' ou 'Fichier': ")
     
     if a == "Fichier": #si l'utilisateur veut entrer un fichier .txt
         b = input("choisir un chemin .txt : ") 
@@ -44,7 +44,6 @@ def scytale_encrypt(texte : str, diametre : int) ->str:
     #Parcours le texte pour insérer les lettres lignes par lignes
     for i in range(len(texte)):
         l[i % diametre] += texte[i]
-  #  print(l)
     #pour afficher en string
     for y in l: #parcours la liste
         result += y #on ajoute les colonnes 1 a 1 dans le résultat
@@ -318,58 +317,6 @@ else:
 # Déchiffrer le texte ou le contenu du fichier en utilisant la clé de Vigenère et afficher le texte déchiffré
 texte_dechiffre = vigenere_dechiffrement(texte_a_dechiffrer, cle_de_vigenere, nom_fichier, supprimer_espaces, supprimer_caracteres)
 print("Le texte déchiffré est :", texte_dechiffre)
-
-
-#ATTAQUE POUR VIGENERE - ANALYSE DE FREQUENCE TENTATIVE #
-
-
-def casser_vigenere(texte_chiffre, langue='fr'):
-    # Charger les fréquences attendues pour la langue choisie
-    with open(f'{langue}_freq.txt') as f:
-        freq_attendues = [float(x.strip().split()[1]) for x in f]
-
-    # Trouver la longueur probable de la clé
-    def indice_de_coincidence(ct):
-        return sum(c1 == c2 for c1, c2 in zip(ct, ct[1:])) / (len(ct) - 1)
-    longueur_max_cle = 1
-    max_indice = 0
-    for i in range(2, len(texte_chiffre)):
-        indice = sum(indice_de_coincidence(texte_chiffre[j::i]) for j in range(i)) / i
-        if indice > max_indice:
-            max_indice = indice
-            longueur_max_cle = i
-
-    # Trouver la clé
-    def decrypter(longueur_cle, decalage):
-        texte_clair = ''
-        for i, c in enumerate(texte_chiffre):
-            k = ord(cle[i % longueur_cle]) - ord('A')
-            p = chr((ord(c) - ord('A') - k + 26 - decalage) % 26 + ord('A'))
-            texte_clair += p
-        return texte_clair
-    cle = ''
-    for i in range(longueur_max_cle):
-        sous_texte = ''.join(texte_chiffre[j] for j in range(i, len(texte_chiffre), longueur_max_cle))
-        freq = collections.Counter(sous_texte)
-        max_correlation = 0
-        meilleur_decalage = 0
-        for decalage in range(26):
-            correlation = 0
-            for j, c in enumerate(sorted(freq.keys())):
-                correlation += freq[c] * freq_attendues[(ord(c) - ord('A') - decalage) % 26]
-            if correlation > max_correlation:
-                max_correlation = correlation
-                meilleur_decalage = decalage
-        cle += chr(meilleur_decalage + ord('A'))
-    return cle, decrypter(longueur_max_cle, 0)
-
-# Exemple d'utilisation
-texte_chiffre = 'BJQSXQJHVYUBYQBJHVYUBYQBJHVYU'
-cle, texte_clair = casser_vigenere(texte_chiffre)
-print(f'Clé : {cle}')
-print(f'Texte : {texte_clair}')
-
-
 
 # SUBSTITUTION MONOALPHABÉTIQUE : Partie de Schneid 
 
