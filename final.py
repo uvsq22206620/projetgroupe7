@@ -310,7 +310,12 @@ print("Le texte déchiffré est :", texte_dechiffre)
 
 
 # SUBSTITUTION MONOALPHABÉTIQUE : Partie de Schneid 
+import random
+import string
 dictionnaire = {}
+
+
+
 
 def encryptage_substitution (message= ""):
 
@@ -329,6 +334,8 @@ def encryptage_substitution (message= ""):
     alphabet = "abcdefghijklmnopqrstuvwxyz"
     caracteres_speciaux = string.punctuation #on place l'ensemble des caractères spéciaux dans une chaîne de caractère. 
     alphabet_melange = random.sample(alphabet, len(alphabet)) #fonction qui permet de melanger aléatoirement une chaîne de caractère, ici c'est l'alphabet. Alphabet mélangé va donc devenir notre clé de chiffrement
+
+
 
     #REMPLACEMENT DES ESPACES ET SUPPRESSION DES CARACTERES SPECIAUX
     if supprimer_espaces.lower() == "oui" :
@@ -351,15 +358,21 @@ def encryptage_substitution (message= ""):
             mot_code += lettre #on ajoute à la chaîne de caractère notre caractère codé
 
     #FIN DE LA FONCTION, RETOUR DU MOT CODE
-    return mot_code
+    return mot_code, alphabet_melange
+
+
+
+
+
 
 
 #CODER UN MESSAGE
 coder_un_message = input("Souhaitez-vous coder un message ? (Répondre par 'oui' ou 'non')")
+
 while coder_un_message.lower() not in ["oui", "non"]: 
     coder_un_message = input("Souhaitez-vous coder un message ? Une réponse par 'oui' ou par 'non' est obligatoire)")
 if coder_un_message == 'oui' :
-    message_chiffre = encryptage_substitution(message = input("Saisir le message à coder"))
+    message_chiffre, cle_de_chiffrement_substitution = encryptage_substitution(message = input("Saisir le message à coder"))
     print("le message codé est :", message_chiffre)
 
 
@@ -368,24 +381,50 @@ coder_un_fichier_texte = input("Souhaitez-vous coder un fichier texte ? Répondr
 
 if coder_un_fichier_texte.lower() == "oui" :
     nom_du_fichier = input("Entrez le nom du fichier avec l'extension '.txt'")
-    with open(nom_du_fichier, "r") as fichier :
-        message_fichier = fichier.read()
-        mot_code = encryptage_substitution(message_fichier)
+    with open(nom_du_fichier, "r") as fichier : #commande qui permet de lire un fichier sans le modifier, fonction 'with' qui permet de garantir que le fichier va être fermé après exécution
+        message_fichier = fichier.read() #fonction read qui permet de renvoyer le fichier dans une chaîne de caractère
+        mot_code, cle_de_chiffrement_substitution = encryptage_substitution(message_fichier)
         print ("Le message du fichier codé est :", mot_code)
+        
+        
+        
 
+#DECHIFFREMENT SUBSTITUTION
+def dechiffrement_substitution (message = "") :
 
-def decryptage_substitution(message_code=""): 
+    cle = cle_de_chiffrement_substitution
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    mot_dechiffre = ""
+
+    for caractere in message : 
+        if caractere in alphabet :
+            mot_dechiffre += alphabet[cle.index(caractere)] #on fait l'inverse
+        else :
+            mot_dechiffre += caractere
+
+    return mot_dechiffre
+
+variable = dechiffrement_substitution(message = input("Saisir le message chiffré"))
+print ("Le message déchiffré est :", variable)
+    
+    
+    
+#ATTAQUE PAR FORCE BRUTE
+import random
+
+def attaque_substitution(message_code=""): 
 
     #MIS EN PLACE DE VARIABLES POUR LA FONCTION
     alphabet = "abcdefghijklmnopqrstuvwxyz"
-    cle_de_dechiffrement = random.sample(alphabet, len(alphabet))
+    alphabet_melange = random.sample(alphabet, len(alphabet))
     message_dechiffre = ""
     
+
 
     #DECHIFFREMENT PAR FORCE BRUTE
     for caractere in message_code:
         if caractere in alphabet:
-            message_dechiffre += cle_de_dechiffrement[alphabet.index(caractere)] #on fait le chemin inverse de l'encryptage jusqu'à trouver la bonne combinaison, si le caractère dans le message n'est pas une lettre alors il n'a pas été codé et est ajouté tel quel au mot 
+            message_dechiffre += alphabet_melange[alphabet.index(caractere)] #on fait le chemin inverse de l'encryptage jusqu'à trouver la bonne combinaison, si le caractère dans le message n'est pas une lettre alors il n'a pas été codé et est ajouté tel quel au mot 
         else:
             message_dechiffre += caractere
 
@@ -393,22 +432,25 @@ def decryptage_substitution(message_code=""):
     return message_dechiffre
 
 
+
 #MIS EN PLACE DE VARIABLES
 message_code = input("Entrez le message chiffré à déchiffer")
-nombre_de_tentatives = int(input("Entrez le nombre de tentatives que vous souhaitez voir (choisir NECESSAIREMENT un nombre positif (ou nul))")) #si le nombre de tentative = 0 alors le code ne rend pas de valeur
-
+nombre_de_tentatives = int(input("Entrez le nombre de tentatives que vous souhaitez voir. Choissisez nécessairement un nombre positif ou nul. (un nombre de tentative supérieur à 500 pourrait entraîner une erreur du programme)")) #si le nombre de tentative = 0 alors le code ne rend pas de valeur
+dictionnaire = {}
+voyelles = "aeiouy"
 
 #NOMBRE DE TENTATIVES
 for i in range(nombre_de_tentatives):
-    essai = decryptage_substitution(message_code)
+    essai = attaque_substitution(message_code)
     if essai not in dictionnaire :
-        dictionnaire[essai] = 1 #si la lettre n'est pas enregistrée dans le dictionnaire, maintenant elle y existe et on y associe sa 'fréquence' qui est de 1
-        print (essai) #on renvoit ensuite ce que le programme a déchiffré à l'utilisateur
-    else :
+        for lettre in essai :
+            if lettre.lower() in voyelles :
+                dictionnaire[essai] = 1  #si la lettre n'est pas enregistrée dans le dictionnaire, maintenant elle y existe et on y associe sa 'fréquence' qui est de 1
+        print (essai) #on renvoit ensuite ce que le programme a déchiffré à l'utilisateur, en excluant les chaînes de caractères sans voyelles car cela ne peut pas être un message en français
+
+    else : 
         continue #si la lettre est déjà dans le dictionnaire, le programme ne le renvoit pas (pour éviter de trouver des similitudes dans ce que peut envoyer python), et continue de le décrypter jusquà 'nombres_de_tentatives'
-        
-        
-        
+
         
         
 #TENTATIVE ATTAQUE ANALYSE DE FRÉQUENCE SUR LA SUBSTITUTION MONOALPHABÉTIQUE
