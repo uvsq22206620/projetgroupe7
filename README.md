@@ -13,10 +13,26 @@ La Scytale (Partie d'Anissa) :
 Le chiffrement de la Scytale est un chiffrement par transposition. Il est l'un des plus anciens dispositifs de cryptographie (les Spartiates). Il consiste à prendre un texte et mettre chaque lettre du texte dans chaque case d'une grille. On aura une clé qui représente le nombre de colonnes, et le but de notre code Scytale est de pivoter la grille en laissant chaque caractère à la position initiale et essayer d'y retrouver un texte clair.
 
 
-Le chiffrement de César (Partie de Kaïs) : Le code de César est une technique de chiffrement qui consiste à remplacer chaque lettre d'un message par une autre lettre située un certain nombre de positions plus loin dans l'alphabet. Le décalage est la clé de chiffrement. Le code de César reste un chiffrement très facile à casser car il n'y a que 26 clés possibles (une pour chaque lettre de l'alphabet
+Explication Cesar et Vigenere ( Partie de Kaïs)
 
+Cesar : - Le chiffrement César est l'un des premiers exemples connus de chiffrement par substitution. Il a été utilisé par Jules César pour communiquer avec ses généraux pendant les guerres. Le chiffrement consiste à décaler chaque lettre d'un certain nombre de positions dans l'alphabet.
+Par exemple, si le décalage est de 3, la lettre "A" devient "D", la lettre "B" devient "E", et ainsi de suite. Le décalage est généralement représenté par un nombre entier compris entre 1 et 25.
+Le code de César en Python utilise cette idée de décalage pour chiffrer un message en remplaçant chaque lettre par une lettre décalée. Le code utilise la fonction chr() pour convertir un entier en caractère ASCII et ord() pour convertir un caractère ASCII en entier.
+La fonction caesar_cipher prend un message et une valeur de décalage (ou shift) comme arguments. Elle itère sur chaque caractère du message et applique le décalage
 
-Le chiffre de Vignénère (Partie de Kaïs) : Le code de Vigenère est une méthode de chiffrement polyalphabétique qui a été inventée par le cryptographe français Blaise de Vigenère au XVIe siècle. La clé de Vigenère est une série de lettres qui est utilisée pour chiffrer le texte brut. Pour chiffrer le texte, chaque lettre du texte est décalée d'un nombre de positions dans l'alphabet en fonction de la lettre correspondante de la clé de Vigenère. Si la clé de Vigenère est plus courte que le texte brut, la clé est répétée jusqu'à ce qu'elle ait la même longueur que le texte.
+- Ce code définit une fonction dechiffrement_cesar qui prend un message chiffré et une valeur de décalage comme arguments et renvoie le message déchiffré correspondant. La fonction itère sur chaque caractère du message chiffré et applique le décalage 
+l'attaque la plus logique pour un chiffrement tel que le code de cesar serait de le faire via brute force ,  cra il n'y a que 26 possibilité en theorie, 
+
+VIGENERE : Le chiffre de Vigenère est une technique de chiffrement par substitution polyalphabétique inventée par le cryptographe français Blaise de Vigenère au 16ème siècle. Il s'agit d'une extension du chiffre de César, qui utilise un décalage fixe pour chiffrer le texte.
+Dans le chiffre de Vigenère, un mot-clé est utilisé pour déterminer une série de décalages pour chaque lettre du texte en clair. Chaque lettre du texte en clair est ensuite décalée en utilisant le décalage correspondant de la série pour obtenir le texte chiffré. Le mot-clé est répété autant de fois que nécessaire pour couvrir tout le texte en clair.
+Ce code utilise une clé secrète appelée cle pour cacher le message texte_clair. La clé est transformée en une liste de nombres en utilisant la fonction ord, qui donne le code ASCII d'une lettre. Le message clair est aussi transformé en une liste de nombres.
+Ensuite, pour chaque lettre du message clair, nous utilisons la clé pour cacher la lettre en utilisant (texte_clair_en_nombres[i] + cle_en_nombres[i % longueur_cle]) % 26. La lettre cachée est ensuite transformée en une lettre lisible en utilisant la fonction chr et ajoutée à la variable texte_chiffre.
+Le résultat final est le message caché sous forme de chaîne de lettres.
+L'attaque la plus courante pour casser un chiffre de Vigenère est l'analyse fréquentielle, qui exploite la répartition statistique des caractères dans une langue donnée pour essayer de déterminer la longueur de la clé et de la déchiffrer. Voici les étapes générales de cette attaque :
+Déterminer la longueur probable de la clé : on peut le faire en utilisant des techniques telles que l'index de coïncidence, qui mesure la probabilité que deux caractères choisis au hasard soient identiques.
+Diviser le texte chiffré en sous-textes correspondant à chaque lettre de la clé : on peut le faire en regroupant les caractères de même position dans le texte chiffré, en fonction de la longueur probable de la clé.
+Déterminer la clé en utilisant l'analyse fréquentielle pour chaque sous-texte : on peut le faire en comparant les distributions fréquentielles des caractères dans chaque sous-texte avec celles attendues dans la langue cible.
+Déchiffrer le texte en utilisant la clé trouvée : une fois que vous avez déterminé la clé, vous pouvez la utiliser pour déchiffrer le texte entier.
 
 
 La Substitution Monoalphabétique Générale (Partie de Schneid) : 
