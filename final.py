@@ -65,7 +65,7 @@ def scytale_decrypt(texte_d : str, diametre : int):
 
     cpt = 0 #compteur pour parcourir tout le texte
     b = 0 
-    for i in range(diametre): #boucle qui va parcourir chq ligne en faisant attention à ne pas dépasser le nombre d'él de la ligne
+    for i in range(diametre): #boucle qui va parcourir chaque ligne en faisant attention à ne pas dépasser le nombre d'éléments de la ligne
         if len(texte_d)%diametre !=0: 
             if reste >0:
                 b = 0
